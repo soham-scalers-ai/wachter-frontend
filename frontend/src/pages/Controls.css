@@ -6,32 +6,6 @@
   min-height: 100vh;
 }
 
-/* .auth-form-container, .login-form {
-  display: flex;
-  flex-direction: column;
-}  */
-
-/* @media screen and (min-width: 600px) {
-  .auth-form-container {
-    padding: 2rem;
-    border: 2px solid rgb(255, 255, 255);
-    border-radius: 40px;
-    margin-left: 15%;
-    margin-right: 15%;
-    scale: 2;
-  }
-} */
-
-/* button {
-  border: none;
-  background-color: rgb(13, 42, 138);
-  padding: 20px;
-  border-radius: 40px;
-  cursor: pointer;
-  color: #ffffff;
-  margin-right: 10rem;
-} */
-
 .wachter-logo {
   scale: 0.5;
   position: absolute;
@@ -52,6 +26,29 @@
   top: 0;
   left: 0;
 }
+
+.RoomControls {
+  display:inline-block;
+  position:relative;
+}
+  
+.RoomControls .controlToggleButton{
+  position: absolute;
+  /* bottom:4em;
+  right:3.5em; */
+}
+
+.controlToggleButton {
+  background-image: url('../images/pointer.png');
+  background-size: 85px 85px;
+  width: 85px;
+  height: 85px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 #topright {
   position: absolute;

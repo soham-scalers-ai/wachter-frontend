@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
-import {Button, FormControl, InputLabel, Select, MenuItem} from "@mui/material"
+import {FormControl, Select, MenuItem} from "@mui/material"
 import {ControlToggleButton} from "./ControlToggleButton"
 
 
@@ -10,14 +9,14 @@ export const Controls = () => {
 
     useEffect(() => {
         setStates([{"RoomName": "Diamond Room", "Image": "rubyroom.png", "RoomObjects" : [
-            {"ButtonName" : "Button1", "ButtonType" : "Toggle", "ButtonLocation": [22,33], "ButtonOrientation": 90},
-            {"ButtonName" : "Button2", "ButtonType" : "Toggle", "ButtonLocation": [22,33], "ButtonOrientation": 90},
-            {"ButtonName" : "Button3", "ButtonType" : "Toggle", "ButtonLocation": [22,33], "ButtonOrientation": 90}
+            {"ButtonName" : "Button1", "ButtonType" : "Toggle", "ButtonLocation": [6,0], "ButtonOrientation": 0},
+            {"ButtonName" : "Button2", "ButtonType" : "Toggle", "ButtonLocation": [0,2.5], "ButtonOrientation": 0},
+            {"ButtonName" : "Button3", "ButtonType" : "Toggle", "ButtonLocation": [3,6], "ButtonOrientation": 0}
             ]},
                {"RoomName": "Ruby Room", "Image": "diamondroom.png", "RoomObjects" : [
-            {"ButtonName" : "Button4", "ButtonType" : "Toggle", "ButtonLocation": [22,33], "ButtonOrientation": 90},
-            {"ButtonName" : "Button5", "ButtonType" : "Toggle", "ButtonLocation": [22,33], "ButtonOrientation": 90},
-            {"ButtonName" : "Button6", "ButtonType" : "Toggle", "ButtonLocation": [22,33], "ButtonOrientation": 90}
+            {"ButtonName" : "Button4", "ButtonType" : "Toggle", "ButtonLocation": [6,7], "ButtonOrientation": 0},
+            {"ButtonName" : "Button5", "ButtonType" : "Toggle", "ButtonLocation": [3,2], "ButtonOrientation": 0},
+            {"ButtonName" : "Button6", "ButtonType" : "Toggle", "ButtonLocation": [4,5], "ButtonOrientation": 0}
             ]}])
         }, [])
 
@@ -39,22 +38,24 @@ export const Controls = () => {
                     </Select>
                 </FormControl>
             </div>
-            {states.filter(extractRoom).map((room) =>{
-                return (
-                    <div class="room"> 
-                        <img src={require("../images/".concat(room["Image"]))}></img>
-                        {room["RoomObjects"].map((buttonData) =>{
-                                    return (
-                                    <div class="room-obj"> 
-                                        <ControlToggleButton toggleButtonData={buttonData}></ControlToggleButton>
-                                    </div>
-                                    )
-                                }
-                            )
-                        }
-                    </div>
-                )
-            })}
+            <div class="RoomControls"> 
+                {states.filter(extractRoom).map((room) =>{
+                    return (
+                        <div class="room"> 
+                            <img src={require("../images/".concat(room["Image"]))}></img>
+                            {room["RoomObjects"].map((buttonData) =>{
+                                        return (
+                                        <div class="room-obj"> 
+                                            <ControlToggleButton toggleButtonData={buttonData}></ControlToggleButton>
+                                        </div>
+                                        )
+                                    }
+                                )
+                            }
+                        </div>
+                    )
+                })}
+            </div>
         </div>
     )
 }
