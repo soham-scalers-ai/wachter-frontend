@@ -10,13 +10,6 @@ export const ControlToggleButton = (props) => {
             room: roomButtonIn,
             obj: objButtonFor,
           })
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          })
-
     }
 
     return(
