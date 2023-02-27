@@ -1,0 +1,71 @@
+[[rooms]]
+RoomName = "Ruby Room"
+Image = "rubyroom.png"
+
+[[rooms.RoomObjects]]
+ObjectName =  "CeilingLights"
+StateType = "Toggle"
+ButtonLocation = [10, 0]
+ButtonOrientation = 0
+TrueTxt = "Turn Off Ceiling Lights"
+FalseTxt = "Turn On Ceiling Lights"
+
+[[rooms.RoomObjects]]
+ObjectName =  "Door"
+StateType = "Toggle"
+ButtonLocation = [0, 0]
+ButtonOrientation = 0
+TrueTxt = "Close Door"
+FalseTxt = "Open Door"
+
+[[rooms.RoomObjects]]
+ObjectName =  "Blinds"
+StateType = "Toggle"
+ButtonLocation = [0, 20]
+ButtonOrientation = 0
+TrueTxt = "Close Blinds"
+FalseTxt = "Open Blinds"
+
+[[rooms.RoomObjects]]
+ObjectName =  "WallLights"
+StateType = "Toggle"
+ButtonLocation = [10, 20]
+ButtonOrientation = 0
+TrueTxt = "Turn Off Wall Lights"
+FalseTxt = "Turn On Wall Lights"
+
+[[rooms]]
+RoomName = "Diamond Room"
+Image = "diamondroom.png"
+
+[[rooms.RoomObjects]]
+ObjectName =  "CeilingLights"
+StateType = "Toggle"
+ButtonLocation = [5, 25]
+ButtonOrientation = 0
+TrueTxt = "Turn Off Ceiling Lights"
+FalseTxt = "Turn On Ceiling Lights"
+
+[[rooms.RoomObjects]]
+ObjectName =  "Door"
+StateType = "Toggle"
+ButtonLocation = [15, 5]
+ButtonOrientation = 0
+TrueTxt = "Close Door"
+FalseTxt = "Open Door"
+
+[[rooms.RoomObjects]]
+ObjectName =  "Blinds"
+StateType = "Toggle"
+ButtonLocation = [15, 25]
+ButtonOrientation = 0
+TrueTxt = "Close Blinds"
+FalseTxt = "Open Blinds"
+
+[[rooms.RoomObjects]]
+ObjectName =  "WallLights"
+StateType = "Toggle"
+ButtonLocation = [5, 5]
+ButtonOrientation = 0
+TrueTxt = "Turn Off Wall Lights"
+FalseTxt = "Turn On Wall Lights"

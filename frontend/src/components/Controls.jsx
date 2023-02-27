@@ -1,36 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import {FormControl, Select, MenuItem} from "@mui/material"
 import {ControlToggleButton} from "./ControlToggleButton"
+import { io } from "socket.io-client"
 
+const socket = io("http://localhost:8081")
 
 export const Controls = () => {
     const [states, setStates] = useState([])
     const [room, setRoom] = useState("Diamond Room")
 
+    const handleStateSent = useCallback((states) => {
+        setStates(states)
+    }, []);
+
     useEffect(() => {
-        setStates([{"RoomName": "Diamond Room", "Image": "rubyroom.png", "RoomObjects" : [
-            {"ButtonName" : "Button1", "ButtonType" : "Toggle", "ButtonLocation": [6,0], "ButtonOrientation": 0},
-            {"ButtonName" : "Button2", "ButtonType" : "Toggle", "ButtonLocation": [0,2.5], "ButtonOrientation": 0},
-            {"ButtonName" : "Button3", "ButtonType" : "Toggle", "ButtonLocation": [3,6], "ButtonOrientation": 0}
-            ]},
-               {"RoomName": "Ruby Room", "Image": "diamondroom.png", "RoomObjects" : [
-            {"ButtonName" : "Button4", "ButtonType" : "Toggle", "ButtonLocation": [6,7], "ButtonOrientation": 0},
-            {"ButtonName" : "Button5", "ButtonType" : "Toggle", "ButtonLocation": [3,2], "ButtonOrientation": 0},
-            {"ButtonName" : "Button6", "ButtonType" : "Toggle", "ButtonLocation": [4,5], "ButtonOrientation": 0}
-            ]}])
-        }, [])
+        socket.on("send-states", handleStateSent)
+        socket.emit("hooked", true)
+        return () => {
+            socket.off("send-states", handleStateSent)
+        }
+    }, [])
 
     function handleRoomChange(event) {
         setRoom(event.target.value);
     }
 
-    function extractRoom(obj) {
-        return obj["RoomName"] == room
-    }
-
     return(
-        <div class="controls">
-            <div class="RoomSelector">
+        <div className="controls">
+            <div className="RoomSelector">
                 <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
                     <Select value={room} label="Room" onChange={handleRoomChange}>
                         <MenuItem value={"Diamond Room"}>Diamond Room</MenuItem>
@@ -38,15 +35,15 @@ export const Controls = () => {
                     </Select>
                 </FormControl>
             </div>
-            <div class="RoomControls"> 
-                {states.filter(extractRoom).map((room) =>{
+            <div className="RoomControls"> 
+                {states.map((roomObj) =>{
                     return (
-                        <div class="room"> 
-                            <img src={require("../images/".concat(room["Image"]))}></img>
-                            {room["RoomObjects"].map((buttonData) =>{
+                        <div className={"room".concat(roomObj["RoomName"] == room)}> 
+                            <img src={require("../images/".concat(roomObj["Image"]))}></img>
+                            {roomObj["RoomObjects"].map((buttonData) =>{
                                         return (
-                                        <div class="room-obj"> 
-                                            <ControlToggleButton toggleButtonData={buttonData}></ControlToggleButton>
+                                        <div className="room-obj"> 
+                                            <ControlToggleButton toggleButtonRoom={roomObj["RoomName"]} toggleButtonData={buttonData}> </ControlToggleButton>
                                         </div>
                                         )
                                     }
