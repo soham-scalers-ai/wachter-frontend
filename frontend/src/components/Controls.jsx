@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import {FormControl, Select, MenuItem} from "@mui/material"
 import {ControlToggleButton} from "./ControlToggleButton"
+import {ControlSlider} from "./ControlSlider"
 import { io } from "socket.io-client"
 
 const socket = io("http://localhost:8081")
@@ -40,10 +41,13 @@ export const Controls = () => {
                     return (
                         <div className={"room".concat(roomObj["RoomName"] == room)}> 
                             <img src={require("../images/".concat(roomObj["Image"]))}></img>
-                            {roomObj["RoomObjects"].map((buttonData) =>{
+                            {roomObj["RoomObjects"].map((obj) =>{
                                         return (
                                         <div className="room-obj"> 
-                                            <ControlToggleButton toggleButtonRoom={roomObj["RoomName"]} toggleButtonData={buttonData}> </ControlToggleButton>
+                                            {obj["StateType"] == "Toggle"
+                                                ? <ControlToggleButton toggleButtonRoom={roomObj["RoomName"]} toggleButtonData={obj}> </ControlToggleButton>
+                                                : <ControlSlider sliderRoom={roomObj["RoomName"]} sliderData={obj}> </ControlSlider>
+                                            }
                                         </div>
                                         )
                                     }

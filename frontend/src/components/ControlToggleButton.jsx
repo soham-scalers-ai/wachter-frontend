@@ -14,8 +14,8 @@ export const ControlToggleButton = (props) => {
 
     return(
         <div className="controlToggleButton" style={{
-            bottom: `${props.toggleButtonData["ButtonLocation"][0]}em`,
-            right: `${props.toggleButtonData["ButtonLocation"][1]}em`,
+            bottom: `${props.toggleButtonData["ControlLocation"][0]}em`,
+            right: `${props.toggleButtonData["ControlLocation"][1]}em`,
           }}>
             <Button disableRipple sx={{"&:hover": {background: "none" }}} style={{ fontSize: '10px'}} onClick={onButtonClick}> 
                 {props.toggleButtonData["State"] ? 

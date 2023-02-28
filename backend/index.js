@@ -15,10 +15,10 @@ const configs = toml.parse(fs.readFileSync('./objectConfigs.toml', 'utf-8'));
 
 configs["rooms"].map((roomObj) => {
     roomObj["RoomObjects"].map((obj) => {
-        if (roomObj["StateType"] == "Toggle") {
-            roomObj["State"] = false
-        } else if (roomObj["StateType"] == "Percentage") {
-            roomObj["State"] = 0
+        if (obj["StateType"] == "Toggle") {
+            obj["State"] = false
+        } else if (obj["StateType"] == "Percentage") {
+            obj["State"] = 0
         }
     })
 })
@@ -52,13 +52,17 @@ function sendStates() {
 sendStates()
 
 const controlEndpoint = asyncHandler(async (req, res, _) => {
-    const {room, obj} = req.body
+    const {room, obj, state} = req.body
 
     for (let val of states) {
         if (val["RoomName"] == room) {
             for (let valObj of val["RoomObjects"]) {
                 if (valObj["ObjectName"] == obj) {
-                    valObj["State"] = !valObj["State"]
+                    if (valObj["StateType"] == "Toggle") {
+                        valObj["State"] = !valObj["State"]
+                    } else  {
+                        valObj["State"] = state
+                    }
                     break
                 }
             }
