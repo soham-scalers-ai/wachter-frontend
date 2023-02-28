@@ -69,3 +69,9 @@ ControlLocation = [5, 5]
 ControlOrientation = 0
 TrueTxt = "Turn Off Wall Lights"
 FalseTxt = "Turn On Wall Lights"
+
+[[rooms.RoomObjects]]
+ObjectName =  "AdjustableWallLights"
+StateType = "Percentage"
+ControlLocation = [20, 20]
+SliderText = "Change Light Level"

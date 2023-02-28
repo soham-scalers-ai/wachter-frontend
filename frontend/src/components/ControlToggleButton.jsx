@@ -17,7 +17,7 @@ export const ControlToggleButton = (props) => {
             bottom: `${props.toggleButtonData["ControlLocation"][0]}em`,
             right: `${props.toggleButtonData["ControlLocation"][1]}em`,
           }}>
-            <Button disableRipple sx={{"&:hover": {background: "none" }}} style={{ fontSize: '10px'}} onClick={onButtonClick}> 
+            <Button disableRipple sx={{"&:hover": {background: "none" }}} style={{ fontSize: '10px', inlineSize: '25px', color: 'white'}} onClick={onButtonClick}> 
                 {props.toggleButtonData["State"] ? 
                 props.toggleButtonData["TrueTxt"] :
                 props.toggleButtonData["FalseTxt"] } 

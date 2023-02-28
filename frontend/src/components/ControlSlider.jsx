@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Slider, InputLabel } from "@mui/material"
+import {Slider} from "@mui/material"
 import axios from 'axios';
 
 export const ControlSlider = (props) => {
@@ -24,7 +24,7 @@ export const ControlSlider = (props) => {
             bottom: `${props.sliderData["ControlLocation"][0]}em`,
             right: `${props.sliderData["ControlLocation"][1]}em`,
           }}>
-            <InputLabel> {props.sliderData["SliderText"]} + ": " + {props.sliderData["State"]} + "%" </InputLabel>
+            <div className="SliderLabel">{props.sliderData["SliderText"]}: {props.sliderData["State"]}%</div>
             <Slider min={0} max={100} size="small" onChange={onSliderChange} onChangeCommitted={onSliderChangeCommitted}> </Slider>
         </div>
     )
