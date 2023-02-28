@@ -34,6 +34,12 @@ ControlOrientation = 0
 TrueTxt = "Turn Off Wall Lights"
 FalseTxt = "Turn On Wall Lights"
 
+[[rooms.RoomObjects]]
+ObjectName =  "AdjustableBlinds"
+StateType = "Percentage"
+ControlLocation = [5, 5]
+SliderText = "Open Blinds"
+
 [[rooms]]
 RoomName = "Diamond Room"
 Image = "diamondroom.png"
@@ -74,4 +80,10 @@ FalseTxt = "Turn On Wall Lights"
 ObjectName =  "AdjustableWallLights"
 StateType = "Percentage"
 ControlLocation = [20, 20]
-SliderText = "Change Light Level"
+SliderText = "Adjust Light Level"
+
+[[rooms.RoomObjects]]
+ObjectName =  "AdjustableBlinds"
+StateType = "Percentage"
+ControlLocation = [0, 10]
+SliderText = "Open Blinds"

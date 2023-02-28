@@ -29,9 +29,9 @@ export const Controls = () => {
     return(
         <div className="controls">
             <div className="RoomSelector">
-                <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                <FormControl variant="standard" sx={{ m: 1.5, minWidth: 150 }}>
                     <Select value={room} label="Room" onChange={handleRoomChange}>
-                        <MenuItem value={"Diamond Room"}>Diamond Room</MenuItem>
+                        <MenuItem value={"Diamond Room"} >Diamond Room</MenuItem>
                         <MenuItem value={"Ruby Room"}>Ruby Room</MenuItem>
                     </Select>
                 </FormControl>
@@ -40,7 +40,9 @@ export const Controls = () => {
                 {states.map((roomObj) =>{
                     return (
                         <div className={"room".concat(roomObj["RoomName"] == room)}> 
-                            <img src={require("../images/".concat(roomObj["Image"]))}></img>
+                            <div className="mainimg">
+                                <img src={require("../images/".concat(roomObj["Image"]))}></img>
+                            </div>
                             {roomObj["RoomObjects"].map((obj) =>{
                                         return (
                                         <div className="room-obj"> 

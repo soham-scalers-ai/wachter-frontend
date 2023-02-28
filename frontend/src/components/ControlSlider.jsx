@@ -25,7 +25,7 @@ export const ControlSlider = (props) => {
             right: `${props.sliderData["ControlLocation"][1]}em`,
           }}>
             <div className="SliderLabel">{props.sliderData["SliderText"]}: {props.sliderData["State"]}%</div>
-            <Slider min={0} max={100} size="small" onChange={onSliderChange} onChangeCommitted={onSliderChangeCommitted}> </Slider>
+            <Slider min={0} max={100} size="small" value={props.sliderData["State"]} onChange={onSliderChange} onChangeCommitted={onSliderChangeCommitted}> </Slider>
         </div>
     )
 }
