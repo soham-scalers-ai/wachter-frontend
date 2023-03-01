@@ -37,7 +37,7 @@
 }
 
 .controlToggleButton {
-  background-image: url('../images/pointer.png');
+  /* background-image: url('../images/pointer.png'); */
   background-size: 100px 100px;
   width: 100px;
   height: 100px;
