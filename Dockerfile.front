@@ -1,0 +1,7 @@
+FROM node:16.15.1-alpine
+
+COPY ./frontend /frontend
+
+WORKDIR /frontend
+
+CMD npm i && npm start
