@@ -4,6 +4,18 @@ const cors = require('cors')
 const bp = require('body-parser')
 const toml = require('toml')
 const fs = require('fs')
+const fetch = require("node-fetch")
+const auth = require('http-auth');
+const authConnect = require("http-auth-connect");
+
+const basic = auth.basic({
+	realm: 'Login',
+	file: __dirname + '/credentials'
+});
+
+app.use(cors())
+app.use(bp.json())
+app.use(bp.urlencoded({ extended: true }))
 
 const io = require('socket.io')(8081, {
     cors: {
@@ -11,23 +23,43 @@ const io = require('socket.io')(8081, {
     }
 })
 
-const configs = toml.parse(fs.readFileSync('./objectConfigs.toml', 'utf-8'));
+const states = toml.parse(fs.readFileSync('./objectConfigs.toml', 'utf-8'));
 
-configs["rooms"].map((roomObj) => {
-    roomObj["RoomObjects"].map((obj) => {
-        if (obj["StateType"] == "Toggle") {
-            obj["State"] = false
-        } else if (obj["StateType"] == "Percentage") {
-            obj["State"] = 0
+for (const room in states) {
+    for (const obj in states[room]["RoomObjects"]) {
+        objectConfigs = states[room]["RoomObjects"][obj]
+        if (objectConfigs["StateType"] == "Toggle") {
+            objectConfigs["State"] = false
+        } else if (objectConfigs["StateType"] == "Percentage") {
+            objectConfigs["State"] = 0
         }
-    })
-})
+    }
+}
 
-states = configs["rooms"]
+function setStates(updateStates) {
+    for (const roomName in updateStates) {
+        for (const objName in updateStates[roomName]) {
+            const objectConfigs = states[roomName]["RoomObjects"][objName]
+            if (objectConfigs["StateType"] == "Toggle") {
+                objectConfigs["State"] = updateStates[roomName][objName] == "off" ? false : true
+            } else if (objectConfigs["StateType"] == "Percentage") {
+                objectConfigs["State"] = parseInt(updateStates[roomName][objName])
+            }
+        }
+    }
+}
 
-app.use(cors())
-app.use(bp.json())
-app.use(bp.urlencoded({ extended: true }))
+fetch('http://localhost:8000/initEMLighting', {method: "PUT"}).then(
+    (resp) => {
+        fetch('http://localhost:8000/getState', {method: "GET"})
+        .then(res => res.json())
+        .then(
+            (response) => {
+                setStates(response.status)
+            }
+        )
+    }
+)
 
 io.on("connection", (socket) => {
     socket.on("hooked", () => {
@@ -52,51 +84,41 @@ function sendStates() {
 sendStates()
 
 const controlEndpoint = asyncHandler(async (req, res, _) => {
-    const {room, obj, state} = req.body
+    const {room, obj} = req.body
 
-    for (let val of states) {
-        if (val["RoomName"] == room) {
-            for (let valObj of val["RoomObjects"]) {
-                if (valObj["ObjectName"] == obj) {
-                    if (valObj["StateType"] == "Toggle") {
-                        valObj["State"] = !valObj["State"]
-                    } else  {
-                        valObj["State"] = state
-                    }
-                    break
-                }
-            }
-            break
-        }
+    const options = {
+        method: "PUT", 
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            'areaName': room, 
+            'luminaireName': obj,
+        })
     }
     
-    res.status(200).send({})
+    fetch('http://localhost:8000/toggleLuminaireState', options)
+    .then(x => x.json())
+    .then((x) => {
+        res.status(200).send({})
+    })
 })
 
 const updateFrontend = asyncHandler(async (req, res, _) => {
-    const {updatedStates} = req.body
-
-    updatedStates.map((room) => {
-        room["RoomObjects"].map((obj) => {
-            for (let val of states) {
-                if (val["RoomName"] == room["RoomName"]) {
-                    for (let valObj of val["RoomObjects"]) {
-                        if (valObj["ObjectName"] == obj["ObjectName"]) {
-                            valObj["State"] = obj["State"]
-                            break
-                        }
-                    }
-                    break
-                }
-            }
-        })
-    })
-
+    const updatedStates = req.body
+    setStates(updatedStates)
     res.status(200).send({})
 })
 
-app.post("/api/controlEndpoint", controlEndpoint)
-app.put("/api/updateFrontend", updateFrontend)
+
+const login = asyncHandler(async (_, res, __) => {
+    res.status(200).send({
+        ok: true
+    })
+})
+
+app.post("/api/login", authConnect(basic), login)
+app.post("/api/controlEndpoint", authConnect(basic), controlEndpoint)
+app.post("/api/updateFrontend", updateFrontend)
+
 
 app.listen(8080)
 

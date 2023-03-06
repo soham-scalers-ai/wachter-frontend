@@ -1,89 +1,57 @@
-[[rooms]]
-RoomName = "Ruby Room"
+[Corridor]
 Image = "rubyroom.png"
 
-[[rooms.RoomObjects]]
-ObjectName =  "CeilingLights"
+[Corridor.RoomObjects.wall]
 StateType = "Toggle"
-ControlLocation = [10, 0]
-ControlOrientation = 0
-TrueTxt = "Turn Off Ceiling Lights"
-FalseTxt = "Turn On Ceiling Lights"
-
-[[rooms.RoomObjects]]
-ObjectName =  "Door"
-StateType = "Toggle"
-ControlLocation = [0, 0]
-ControlOrientation = 0
-TrueTxt = "Close Door"
-FalseTxt = "Open Door"
-
-[[rooms.RoomObjects]]
-ObjectName =  "Blinds"
-StateType = "Toggle"
-ControlLocation = [0, 20]
-ControlOrientation = 0
-TrueTxt = "Close Blinds"
-FalseTxt = "Open Blinds"
-
-[[rooms.RoomObjects]]
-ObjectName =  "WallLights"
-StateType = "Toggle"
-ControlLocation = [10, 20]
+ControlLocation = [45, 40]
 ControlOrientation = 0
 TrueTxt = "Turn Off Wall Lights"
 FalseTxt = "Turn On Wall Lights"
 
-[[rooms.RoomObjects]]
-ObjectName =  "AdjustableBlinds"
-StateType = "Percentage"
-ControlLocation = [5, 5]
-SliderText = "Open Blinds"
+[Corridor.RoomObjects.ceiling]
+StateType = "Toggle"
+ControlLocation = [87, 51]
+ControlOrientation = 0
+TrueTxt = "Turn Off Ceiling Lights"
+FalseTxt = "Turn On Ceiling Lights"
 
-[[rooms]]
-RoomName = "Diamond Room"
+
+
+[Labextension]
 Image = "diamondroom.png"
 
-[[rooms.RoomObjects]]
-ObjectName =  "CeilingLights"
+[Labextension.RoomObjects.table]
 StateType = "Toggle"
-ControlLocation = [5, 25]
+ControlLocation = [40, 20]
+ControlOrientation = 0
+TrueTxt = "Turn Off Table Lights"
+FalseTxt = "Turn On Table Lights"
+
+
+
+[Door1]
+Image = "rubyroom.png"
+
+[Door1.RoomObjects.ceiling]
+StateType = "Toggle"
+ControlLocation = [60, 50]
 ControlOrientation = 0
 TrueTxt = "Turn Off Ceiling Lights"
 FalseTxt = "Turn On Ceiling Lights"
 
-[[rooms.RoomObjects]]
-ObjectName =  "Door"
-StateType = "Toggle"
-ControlLocation = [15, 5]
-ControlOrientation = 0
-TrueTxt = "Close Door"
-FalseTxt = "Open Door"
 
-[[rooms.RoomObjects]]
-ObjectName =  "Blinds"
-StateType = "Toggle"
-ControlLocation = [15, 25]
-ControlOrientation = 0
-TrueTxt = "Close Blinds"
-FalseTxt = "Open Blinds"
 
-[[rooms.RoomObjects]]
-ObjectName =  "WallLights"
-StateType = "Toggle"
-ControlLocation = [5, 5]
-ControlOrientation = 0
-TrueTxt = "Turn Off Wall Lights"
-FalseTxt = "Turn On Wall Lights"
+[Door2]
+Image = "diamondroom.png"
 
-[[rooms.RoomObjects]]
-ObjectName =  "AdjustableWallLights"
+[Door2.RoomObjects.ceiling]
+StateType = "Toggle"
+ControlLocation = [60, 45]
+ControlOrientation = 0
+TrueTxt = "Turn Off Ceiling Lights"
+FalseTxt = "Turn On Ceiling Lights"
+
+[Door2.RoomObjects.blinds]
 StateType = "Percentage"
-ControlLocation = [20, 20]
-SliderText = "Adjust Light Level"
-
-[[rooms.RoomObjects]]
-ObjectName =  "AdjustableBlinds"
-StateType = "Percentage"
-ControlLocation = [0, 10]
+ControlLocation = [95, 70]
 SliderText = "Open Blinds"

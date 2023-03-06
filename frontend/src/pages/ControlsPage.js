@@ -1,6 +1,5 @@
 import './Controls.css';
-import logo from "../wachter.png"
-import placesimg from "../places.png"
+import logo from "../images/wachter.png"
 import { Controls } from "../components/Controls"
 
 export function ControlsPage() {

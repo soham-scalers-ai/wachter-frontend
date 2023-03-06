@@ -2,8 +2,8 @@
 
 
   import './Login.css';
-  import logo from "../wachter.png"
-  import { LoginComponent } from './LoginComponent';
+  import logo from "../images/wachter.png"
+  import { LoginComponent } from '../components/LoginComponent';
   
   export function LoginPage() {
     return (
