@@ -32,8 +32,8 @@ export const Controls = () => {
     return(
         <div className="controls">
             <div className="RoomSelector">
-                <FormControl variant="standard" sx={{ m: 1.5, minWidth: 150 }}>
-                    <Select value={room} label="Room" onChange={handleRoomChange} defaultValue={Object.keys(states)[0]}>
+                <FormControl variant="standard" sx={{ m: 1.5, minWidth: 150}}>
+                    <Select value={room} label="Room" onChange={handleRoomChange} defaultValue={Object.keys(states)[0]} style={{ color: 'white'}}>
                         {Object.keys(states).map((roomName) =>{
                             return (
                                 <MenuItem value={roomName} >{roomName}</MenuItem>

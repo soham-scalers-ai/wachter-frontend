@@ -5,9 +5,9 @@ import { Controls } from "../components/Controls"
 export function ControlsPage() {
   return (
     <div className="ControlsApp">
-      <div className="wachter-logo">
+      {/* <div className="wachter-logo">
         <img id="topright" src={logo} alt="logo" />
-      </div>
+      </div> */}
       <Controls />
     </div>
   );
